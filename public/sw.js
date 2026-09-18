@@ -1,5 +1,5 @@
 // AuraFix PWA Service Worker
-const CACHE_NAME = 'aurafix-cache-v1';
+const CACHE_NAME = 'aurafix-cache-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -26,7 +26,19 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Navigation fallback & cache-first for static assets
+  const url = new URL(event.request.url);
+
+  // Skip non-GET requests and API calls
+  if (event.request.method !== 'GET' || url.pathname.startsWith('/api/')) {
+    return;
+  }
+
+  // Bypass cache completely for Vite dev server internal assets
+  if (url.pathname.startsWith('/src/') || url.pathname.startsWith('/@') || url.pathname.includes('node_modules')) {
+    return;
+  }
+
+  // Navigation fallback: network first, then cached /index.html
   if (event.request.mode === 'navigate') {
     event.respondWith(
       fetch(event.request).catch(() => {
@@ -36,24 +48,20 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Assets: Network-first with cache fallback so updates are instant
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      return fetch(event.request).then((networkResponse) => {
-        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-          return networkResponse;
+    fetch(event.request)
+      .then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
         }
-        const responseToCache = networkResponse.clone();
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache);
-        });
         return networkResponse;
-      }).catch(() => {
-        // Offline fallback
-        return cachedResponse;
-      });
-    })
+      })
+      .catch(() => {
+        return caches.match(event.request);
+      })
   );
 });

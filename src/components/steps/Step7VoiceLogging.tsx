@@ -74,25 +74,25 @@ export const Step7VoiceLogging: React.FC<Step7VoiceLoggingProps> = ({
   return (
     <div className="space-y-4 animate-in fade-in duration-300">
       {/* Title Header Card */}
-      <div className="bg-white rounded-2xl p-4 sm:p-5 border border-lime-200 shadow-sm">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-lime-100 border border-lime-300 flex items-center justify-center text-lime-800 shrink-0">
-              <Mic className="w-6 h-6" />
+      <div className="bg-white rounded-2xl p-3.5 sm:p-5 border border-lime-200 shadow-sm">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-lime-100 border border-lime-300 flex items-center justify-center text-lime-800 shrink-0">
+              <Mic className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <div>
-              <h2 className="text-base sm:text-lg font-black text-slate-800">Multi-Input Voice Logging</h2>
-              <p className="text-xs text-slate-500 font-medium">Step 7 of 8 · Conversational NLP & Real-Time Extraction</p>
+            <div className="min-w-0 flex-1">
+              <h2 className="text-sm sm:text-lg font-black text-slate-800 truncate">Multi-Input Voice Logging</h2>
+              <p className="text-[11px] sm:text-xs text-slate-500 font-medium truncate">Step 7 of 8 · Conversational NLP</p>
             </div>
           </div>
-          <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-lime-100 text-lime-900 border border-lime-300">
+          <span className="text-[11px] font-bold px-2.5 sm:px-3 py-1 rounded-full bg-lime-100 text-lime-900 border border-lime-300 shrink-0 whitespace-nowrap">
             Web Speech API
           </span>
         </div>
       </div>
 
-      {/* Responsive 2-Column Grid on Desktop */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+      {/* Responsive 2-Column Grid on Desktop (lg+) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
         {/* Left Column: Voice Recorder Hub */}
         <div className="bg-gradient-to-b from-white to-lime-50/40 rounded-2xl p-5 border border-lime-200 shadow-sm text-center space-y-4">
           <div className="flex flex-col items-center">

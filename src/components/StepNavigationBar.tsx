@@ -25,9 +25,9 @@ export const StepNavigationBar: React.FC<StepNavigationBarProps> = ({
   }, [currentStep]);
 
   return (
-    <nav className="w-full bg-white/90 border-b border-lime-200/80 px-2 sm:px-6 py-2 sticky top-[53px] z-30 backdrop-blur-md">
-      {/* Desktop Stepper View (md+) */}
-      <div className="hidden md:flex items-center justify-between gap-2 max-w-6xl mx-auto">
+    <nav className="w-full bg-white/95 border-b border-lime-200/80 px-2 sm:px-6 py-1.5 backdrop-blur-md">
+      {/* Desktop Stepper View (lg+ / 1024px+) */}
+      <div className="hidden lg:flex items-center justify-between gap-2 max-w-6xl mx-auto">
         {WALKTHROUGH_STEPS.map((s) => {
           const isActive = s.stepNumber === currentStep;
           const isPassed = s.stepNumber < currentStep;
@@ -68,8 +68,8 @@ export const StepNavigationBar: React.FC<StepNavigationBarProps> = ({
         })}
       </div>
 
-      {/* Mobile Horizontal Scroll View (< md) */}
-      <div className="flex md:hidden items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5 px-1">
+      {/* Mobile & Tablet Horizontal Scroll View (< lg) */}
+      <div className="flex lg:hidden items-center gap-2 overflow-x-auto scrollbar-none py-0.5 px-1 max-w-6xl mx-auto">
         {WALKTHROUGH_STEPS.map((s) => {
           const isActive = s.stepNumber === currentStep;
           const isPassed = s.stepNumber < currentStep;

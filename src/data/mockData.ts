@@ -198,7 +198,7 @@ export const WALKTHROUGH_STEPS: WalkthroughStep[] = [
   {
     stepNumber: 1,
     title: 'Health Profile & Context',
-    shortTitle: 'User Profile',
+    shortTitle: 'Profile',
     aiFeatureTitle: 'Personalized Health Baseline',
     callout: 'Step 1: Health parameters establish baseline macro and micro-nutrient targets.',
     tagline: 'Customized for Age 28, 74kg with Lean Muscle & Diabetic-friendly focus.',
@@ -222,7 +222,7 @@ export const WALKTHROUGH_STEPS: WalkthroughStep[] = [
   {
     stepNumber: 4,
     title: 'Portion Adjustment & Confirmation',
-    shortTitle: 'Human-in-Loop',
+    shortTitle: 'Portion Adjust',
     aiFeatureTitle: 'Human-in-the-Loop Override',
     callout: 'Step 4: Keeps human-in-the-loop for quick portion adjustments.',
     tagline: 'One-tap preset chips or grams slider for real-world flexibility.',
@@ -238,7 +238,7 @@ export const WALKTHROUGH_STEPS: WalkthroughStep[] = [
   {
     stepNumber: 6,
     title: 'Context-Aware Recommendation & Regional Substitution',
-    shortTitle: 'TN Regional AI',
+    shortTitle: 'Regional AI',
     aiFeatureTitle: 'Regional Hyper-Local Dietary Matcher',
     callout: 'Step 6: Context-aware recommendations based on regional availability, budget, and dietary preference.',
     tagline: 'Budget-friendly Tamil Nadu options: Sundal (₹20), Boiled Eggs (₹14), Curd (₹15).',
@@ -254,7 +254,7 @@ export const WALKTHROUGH_STEPS: WalkthroughStep[] = [
   {
     stepNumber: 8,
     title: 'Comprehensive Daily Health Dashboard',
-    shortTitle: 'Health Radar',
+    shortTitle: 'Dashboard',
     aiFeatureTitle: 'Preventive Health & Longitudinal Metrics',
     callout: 'Step 8: Consolidated daily and weekly health trends.',
     tagline: 'Radial macro meters, sodium safety thresholds & weekly consistency tracker.',

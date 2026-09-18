@@ -45,80 +45,80 @@ export const Step4PortionAdjust: React.FC<Step4PortionAdjustProps> = ({
   return (
     <div className="space-y-4 animate-in fade-in duration-300">
       {/* Title Header Card */}
-      <div className="bg-white rounded-2xl p-4 sm:p-5 border border-lime-200 shadow-sm">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-lime-100 border border-lime-300 flex items-center justify-center text-lime-800 shrink-0">
-              <Sliders className="w-6 h-6" />
+      <div className="bg-white rounded-2xl p-3.5 sm:p-5 border border-lime-200 shadow-sm">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-lime-100 border border-lime-300 flex items-center justify-center text-lime-800 shrink-0">
+              <Sliders className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <div>
-              <h2 className="text-base sm:text-lg font-black text-slate-800">Portion Adjustment</h2>
-              <p className="text-xs text-slate-500 font-medium">Step 4 of 8 · Human-in-the-Loop Portion Override</p>
+            <div className="min-w-0 flex-1">
+              <h2 className="text-sm sm:text-lg font-black text-slate-800 truncate">Portion Adjustment</h2>
+              <p className="text-[11px] sm:text-xs text-slate-500 font-medium truncate">Step 4 of 8 · Human Override</p>
             </div>
           </div>
           <button
             onClick={() => handleApplyPreset(250)}
-            className="flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition shadow-2xs"
+            className="flex items-center gap-1.5 text-xs font-bold px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition shadow-2xs shrink-0"
             title="Reset to AI Vision Detection (250g)"
           >
             <RotateCcw className="w-3.5 h-3.5" />
-            <span>AI Reset (250g)</span>
+            <span>AI Reset</span>
           </button>
         </div>
       </div>
 
-      {/* Responsive 2-Column Grid on Desktop */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+      {/* Responsive 2-Column Grid on Desktop (lg+) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
         {/* Left Column: Quick Presets & Custom Grams Slider */}
         <div className="bg-white rounded-2xl p-4 sm:p-5 border border-lime-200 shadow-sm space-y-4">
           <div>
             <label className="text-xs sm:text-sm font-bold text-slate-800 block mb-2.5">
               One-Tap Quick Presets:
             </label>
-            <div className="grid grid-cols-3 gap-2.5">
+            <div className="grid grid-cols-3 gap-2 sm:gap-2.5">
               {/* Small */}
               <button
                 type="button"
                 onClick={() => handleApplyPreset(200)}
-                className={`p-3 rounded-xl border text-center transition ${
+                className={`p-2.5 sm:p-3 rounded-xl border text-center transition ${
                   portionGrams === 200
                     ? 'bg-lime-500 border-lime-600 text-slate-950 font-bold shadow-xs'
                     : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700'
                 }`}
               >
                 <span className="block text-xs sm:text-sm font-black">Small</span>
-                <span className="text-[11px] opacity-85 font-medium">200g (2 units)</span>
+                <span className="text-[10px] sm:text-[11px] opacity-85 font-medium">200g (2)</span>
               </button>
 
               {/* Medium (AI Detected) */}
               <button
                 type="button"
                 onClick={() => handleApplyPreset(250)}
-                className={`p-3 rounded-xl border text-center transition relative ${
+                className={`p-2.5 sm:p-3 rounded-xl border text-center transition relative ${
                   portionGrams === 250
                     ? 'bg-lime-500 border-lime-600 text-slate-950 font-bold shadow-xs'
                     : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700'
                 }`}
               >
-                <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-lime-800 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-xs">
+                <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-lime-800 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow-xs">
                   AI Match
                 </span>
                 <span className="block text-xs sm:text-sm font-black">Medium</span>
-                <span className="text-[11px] opacity-85 font-medium">250g (2.5 units)</span>
+                <span className="text-[10px] sm:text-[11px] opacity-85 font-medium">250g (2.5)</span>
               </button>
 
               {/* Large */}
               <button
                 type="button"
                 onClick={() => handleApplyPreset(300)}
-                className={`p-3 rounded-xl border text-center transition ${
+                className={`p-2.5 sm:p-3 rounded-xl border text-center transition ${
                   portionGrams === 300
                     ? 'bg-lime-500 border-lime-600 text-slate-950 font-bold shadow-xs'
                     : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700'
                 }`}
               >
                 <span className="block text-xs sm:text-sm font-black">Large</span>
-                <span className="text-[11px] opacity-85 font-medium">300g (Full)</span>
+                <span className="text-[10px] sm:text-[11px] opacity-85 font-medium">300g (Full)</span>
               </button>
             </div>
           </div>
@@ -129,7 +129,7 @@ export const Step4PortionAdjust: React.FC<Step4PortionAdjustProps> = ({
               <label className="text-xs sm:text-sm font-bold text-slate-800">
                 Fine-Tune Custom Grams:
               </label>
-              <span className="text-base font-black text-lime-900 bg-lime-100 px-3 py-0.5 rounded-lg border border-lime-200 font-mono">
+              <span className="text-sm sm:text-base font-black text-lime-900 bg-lime-100 px-2.5 py-0.5 rounded-lg border border-lime-200 font-mono">
                 {portionGrams}g
               </span>
             </div>
@@ -147,7 +147,7 @@ export const Step4PortionAdjust: React.FC<Step4PortionAdjustProps> = ({
               className="w-full accent-lime-600 cursor-pointer h-2.5 bg-slate-200 rounded-lg"
             />
 
-            <div className="flex justify-between text-[11px] text-slate-500 font-medium mt-1.5">
+            <div className="flex justify-between text-[10px] sm:text-[11px] text-slate-500 font-medium mt-1.5">
               <span>100g (1 Dosa)</span>
               <span className="text-lime-800 font-bold">250g (AI Intake)</span>
               <span>450g (Full Feast)</span>
@@ -164,26 +164,26 @@ export const Step4PortionAdjust: React.FC<Step4PortionAdjustProps> = ({
             </span>
           </div>
 
-          <div className="grid grid-cols-2 min-[420px]:grid-cols-4 gap-2.5 text-center">
-            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 text-center">
+            <div className="bg-slate-50 p-2.5 sm:p-3 rounded-xl border border-slate-200">
               <span className="text-[10px] uppercase font-bold text-slate-500 block">Calories</span>
-              <span className="text-lg font-black text-slate-800">{scaledCalories}</span>
-              <span className="text-[10px] text-slate-400 block font-medium">kcal</span>
+              <span className="text-base sm:text-lg font-black text-slate-800">{scaledCalories}</span>
+              <span className="text-[9px] sm:text-[10px] text-slate-400 block font-medium">kcal</span>
             </div>
-            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+            <div className="bg-slate-50 p-2.5 sm:p-3 rounded-xl border border-slate-200">
               <span className="text-[10px] uppercase font-bold text-slate-500 block">Carbs</span>
-              <span className="text-lg font-black text-slate-800">{scaledCarbs}g</span>
-              <span className="text-[10px] text-slate-400 block font-medium">dosa base</span>
+              <span className="text-base sm:text-lg font-black text-slate-800">{scaledCarbs}g</span>
+              <span className="text-[9px] sm:text-[10px] text-slate-400 block font-medium">dosa base</span>
             </div>
-            <div className="bg-lime-50/80 p-3 rounded-xl border border-lime-200">
+            <div className="bg-lime-50/80 p-2.5 sm:p-3 rounded-xl border border-lime-200">
               <span className="text-[10px] uppercase font-bold text-lime-800 block">Protein</span>
-              <span className="text-lg font-black text-lime-950">{scaledProtein}g</span>
-              <span className="text-[10px] text-lime-700 block font-medium">intake</span>
+              <span className="text-base sm:text-lg font-black text-lime-950">{scaledProtein}g</span>
+              <span className="text-[9px] sm:text-[10px] text-lime-700 block font-medium">intake</span>
             </div>
-            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+            <div className="bg-slate-50 p-2.5 sm:p-3 rounded-xl border border-slate-200">
               <span className="text-[10px] uppercase font-bold text-slate-500 block">Fat</span>
-              <span className="text-lg font-black text-slate-800">{scaledFat}g</span>
-              <span className="text-[10px] text-slate-400 block font-medium">oil/ghee</span>
+              <span className="text-base sm:text-lg font-black text-slate-800">{scaledFat}g</span>
+              <span className="text-[9px] sm:text-[10px] text-slate-400 block font-medium">oil/ghee</span>
             </div>
           </div>
 

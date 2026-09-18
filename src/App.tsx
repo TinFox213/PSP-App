@@ -34,13 +34,8 @@ export default function App() {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [isTourMode, setIsTourMode] = useState<boolean>(true);
 
-  // Auto-detect responsive mode: default to 'expanded' on desktop/tablet, 'mobile' on narrow screens
-  const [viewMode, setViewMode] = useState<'mobile' | 'expanded'>(() => {
-    if (typeof window !== 'undefined') {
-      return window.innerWidth >= 768 ? 'expanded' : 'mobile';
-    }
-    return 'expanded';
-  });
+  // Optional Phone Mockup Preview mode for testing (default false, natural responsive layout)
+  const [phonePreview, setPhonePreview] = useState<boolean>(false);
 
   const [apiStatus, setApiStatus] = useState<ApiStatus>({
     isLive: false,
@@ -223,37 +218,35 @@ export default function App() {
   };
 
   const currentStepInfo = WALKTHROUGH_STEPS.find((s) => s.stepNumber === currentStep) || WALKTHROUGH_STEPS[0];
-  const containerMaxWidthClass = viewMode === 'expanded' ? 'max-w-6xl' : 'max-w-md';
+  const containerMaxWidthClass = phonePreview ? 'max-w-md' : 'max-w-6xl';
 
   return (
     <div className="min-h-screen bg-slate-100 flex flex-col items-center selection:bg-lime-200 selection:text-lime-900 font-sans transition-colors duration-300">
       {/* Offline Status Badge */}
       <OfflineIndicator />
 
-      {/* Top Header Navigation (Spans full-width with max-w-6xl inner container) */}
-      <Header
-        currentStep={currentStep}
-        isTourMode={isTourMode}
-        onToggleTourMode={() => setIsTourMode((prev) => !prev)}
-        onResetDemo={handleResetDemo}
-        apiStatus={apiStatus}
-        viewMode={viewMode}
-        onToggleViewMode={() =>
-          setViewMode((prev) => (prev === 'mobile' ? 'expanded' : 'mobile'))
-        }
-      />
+      {/* Unified Sticky Header & Stepper Navigation Bar */}
+      <div className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md shadow-xs">
+        <Header
+          currentStep={currentStep}
+          isTourMode={isTourMode}
+          onToggleTourMode={() => setIsTourMode((prev) => !prev)}
+          onResetDemo={handleResetDemo}
+          apiStatus={apiStatus}
+          viewMode={phonePreview ? 'mobile' : 'expanded'}
+          onToggleViewMode={() => setPhonePreview((prev) => !prev)}
+        />
+        <StepNavigationBar
+          currentStep={currentStep}
+          onSelectStep={handleSelectStep}
+        />
+      </div>
 
-      {/* Step Navigation Bar (Desktop Stepper / Mobile Auto-scrolling Tabs) */}
-      <StepNavigationBar
-        currentStep={currentStep}
-        onSelectStep={handleSelectStep}
-      />
-
-      {/* Main Container */}
+      {/* Main Responsive Container */}
       <div
         className={`w-full ${containerMaxWidthClass} flex-1 flex flex-col relative px-3 sm:px-6 py-4 space-y-4 pb-28 transition-all duration-300 ${
-          viewMode === 'mobile'
-            ? 'bg-lime-50/40 border-x border-lime-200/80 shadow-2xl min-h-screen my-3 rounded-3xl'
+          phonePreview
+            ? 'bg-white border-4 border-slate-800 shadow-2xl min-h-[844px] my-6 rounded-[40px] p-3'
             : ''
         }`}
       >

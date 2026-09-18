@@ -22,20 +22,20 @@ export const Step5NutrientGap: React.FC<Step5NutrientGapProps> = ({
   return (
     <div className="space-y-4 animate-in fade-in duration-300">
       {/* Title Header Card */}
-      <div className="bg-white rounded-2xl p-4 sm:p-5 border border-lime-200 shadow-sm">
-        <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-xl bg-lime-100 border border-lime-300 flex items-center justify-center text-lime-800 shrink-0">
-            <PieChart className="w-6 h-6" />
+      <div className="bg-white rounded-2xl p-3.5 sm:p-5 border border-lime-200 shadow-sm">
+        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-lime-100 border border-lime-300 flex items-center justify-center text-lime-800 shrink-0">
+            <PieChart className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
-          <div>
-            <h2 className="text-base sm:text-lg font-black text-slate-800">Real-Time Nutrient Gap Analysis</h2>
-            <p className="text-xs text-slate-500 font-medium">Step 5 of 8 · Macro Deficit Radar & Glycemic Balancing</p>
+          <div className="min-w-0 flex-1">
+            <h2 className="text-sm sm:text-lg font-black text-slate-800 truncate">Real-Time Nutrient Gap Analysis</h2>
+            <p className="text-[11px] sm:text-xs text-slate-500 font-medium truncate">Step 5 of 8 · Macro Deficit Radar</p>
           </div>
         </div>
       </div>
 
-      {/* Responsive 2-Column Grid on Desktop */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+      {/* Responsive 2-Column Grid on Desktop (lg+) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
         {/* Left Column: Meal Nutritional Breakdown */}
         <div className="bg-white rounded-2xl p-4 sm:p-5 border border-lime-200 shadow-sm space-y-3.5">
           <div className="flex items-center justify-between">
@@ -49,29 +49,29 @@ export const Step5NutrientGap: React.FC<Step5NutrientGapProps> = ({
           </div>
 
           {/* Macro Badges Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
-            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 shadow-2xs">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 text-center">
+            <div className="bg-slate-50 p-2.5 sm:p-3 rounded-xl border border-slate-200 shadow-2xs">
               <span className="text-[10px] uppercase font-bold text-slate-400 block">Calories</span>
-              <span className="text-lg font-black text-slate-800">{mealMath.calories}</span>
-              <span className="text-[10px] text-slate-400 font-medium">kcal</span>
+              <span className="text-base sm:text-lg font-black text-slate-800">{mealMath.calories}</span>
+              <span className="text-[9px] sm:text-[10px] text-slate-400 font-medium">kcal</span>
             </div>
 
-            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 shadow-2xs">
+            <div className="bg-slate-50 p-2.5 sm:p-3 rounded-xl border border-slate-200 shadow-2xs">
               <span className="text-[10px] uppercase font-bold text-slate-400 block">Carbs</span>
-              <span className="text-lg font-black text-slate-800">{mealMath.carbsG}g</span>
-              <span className="text-[10px] text-amber-600 font-medium">high-carb</span>
+              <span className="text-base sm:text-lg font-black text-slate-800">{mealMath.carbsG}g</span>
+              <span className="text-[9px] sm:text-[10px] text-amber-600 font-medium">high-carb</span>
             </div>
 
-            <div className="bg-amber-50 p-3 rounded-xl border border-amber-200 shadow-2xs">
+            <div className="bg-amber-50 p-2.5 sm:p-3 rounded-xl border border-amber-200 shadow-2xs">
               <span className="text-[10px] uppercase font-bold text-amber-800 block">Protein</span>
-              <span className="text-lg font-black text-amber-950">{mealMath.proteinG}g</span>
-              <span className="text-[10px] text-amber-700 font-medium">low ratio</span>
+              <span className="text-base sm:text-lg font-black text-amber-950">{mealMath.proteinG}g</span>
+              <span className="text-[9px] sm:text-[10px] text-amber-700 font-medium">low ratio</span>
             </div>
 
-            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 shadow-2xs">
+            <div className="bg-slate-50 p-2.5 sm:p-3 rounded-xl border border-slate-200 shadow-2xs">
               <span className="text-[10px] uppercase font-bold text-slate-400 block">Fat</span>
-              <span className="text-lg font-black text-slate-800">{mealMath.fatG}g</span>
-              <span className="text-[10px] text-slate-400 font-medium">moderate</span>
+              <span className="text-base sm:text-lg font-black text-slate-800">{mealMath.fatG}g</span>
+              <span className="text-[9px] sm:text-[10px] text-slate-400 font-medium">moderate</span>
             </div>
           </div>
 

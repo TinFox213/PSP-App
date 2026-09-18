@@ -32,11 +32,13 @@ export const WalkthroughController: React.FC<WalkthroughControllerProps> = ({
         <button
           onClick={onPrev}
           disabled={currentStep <= 1}
-          className={`flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition shrink-0 ${
+          className={`flex items-center justify-center gap-1 p-2 sm:px-3.5 sm:py-2 rounded-xl text-xs font-bold transition shrink-0 ${
             currentStep <= 1
               ? 'text-slate-300 bg-slate-100/50 cursor-not-allowed'
               : 'text-slate-700 bg-slate-100 hover:bg-slate-200 active:scale-95 shadow-2xs'
           }`}
+          aria-label="Previous Step"
+          title="Previous Step"
         >
           <ChevronLeft className="w-4 h-4" />
           <span className="hidden sm:inline">Previous</span>
@@ -46,15 +48,24 @@ export const WalkthroughController: React.FC<WalkthroughControllerProps> = ({
         <div className="flex flex-col items-center justify-center px-1 min-w-0 flex-1">
           <div className="flex items-center gap-1.5 truncate max-w-full">
             <span className="text-xs font-black text-slate-800 shrink-0">
-              Step {currentStep} of {totalSteps}
+              {currentStep}/{totalSteps}
             </span>
-            <span className="text-[10px] text-slate-400 shrink-0">·</span>
-            <span className="text-[11px] text-lime-800 font-bold truncate max-w-[120px] sm:max-w-[220px]">
+            <span className="text-[10px] text-slate-400 shrink-0 hidden sm:inline">·</span>
+            <span className="text-[11px] text-lime-800 font-bold truncate max-w-[100px] sm:max-w-[220px]">
               {stepInfo.shortTitle}
             </span>
           </div>
-          {/* Step Progress Dots */}
-          <div className="flex items-center gap-1.5 mt-1">
+
+          {/* Progress Bar on Mobile (< sm) */}
+          <div className="w-full max-w-[100px] h-1.5 bg-slate-200 rounded-full overflow-hidden mt-1 sm:hidden">
+            <div
+              className="h-full bg-lime-600 rounded-full transition-all duration-300"
+              style={{ width: `${(currentStep / totalSteps) * 100}%` }}
+            />
+          </div>
+
+          {/* Step Progress Dots on Desktop & Tablet (sm+) */}
+          <div className="hidden sm:flex items-center gap-1.5 mt-1">
             {WALKTHROUGH_STEPS.map((s) => (
               <button
                 key={s.stepNumber}
@@ -73,10 +84,10 @@ export const WalkthroughController: React.FC<WalkthroughControllerProps> = ({
         </div>
 
         {/* Next / Finish & Tour Mode Controls */}
-        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
           <button
             onClick={onToggleTourMode}
-            className={`p-2 rounded-xl transition ${
+            className={`p-1.5 sm:p-2 rounded-xl transition ${
               isTourMode
                 ? 'bg-lime-100 text-lime-800 border border-lime-300'
                 : 'text-slate-500 hover:bg-slate-100 border border-transparent'
@@ -90,7 +101,7 @@ export const WalkthroughController: React.FC<WalkthroughControllerProps> = ({
           {currentStep < totalSteps ? (
             <button
               onClick={onNext}
-              className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold bg-lime-500 hover:bg-lime-600 active:scale-95 text-slate-950 shadow-xs transition"
+              className="flex items-center gap-1 px-3 sm:px-4 py-2 rounded-xl text-xs font-bold bg-lime-500 hover:bg-lime-600 active:scale-95 text-slate-950 shadow-xs transition"
             >
               <span>Next</span>
               <ChevronRight className="w-4 h-4" />
@@ -98,7 +109,7 @@ export const WalkthroughController: React.FC<WalkthroughControllerProps> = ({
           ) : (
             <button
               onClick={() => onSelectStep(1)}
-              className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white shadow-xs transition"
+              className="flex items-center gap-1 px-3 sm:px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white shadow-xs transition"
             >
               <CheckCircle2 className="w-4 h-4" />
               <span>Restart</span>

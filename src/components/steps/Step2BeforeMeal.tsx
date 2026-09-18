@@ -24,32 +24,32 @@ export const Step2BeforeMeal: React.FC<Step2BeforeMealProps> = ({
   return (
     <div className="space-y-4 animate-in fade-in duration-300">
       {/* Title Header */}
-      <div className="bg-white rounded-2xl p-4 sm:p-5 border border-lime-200 shadow-sm">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-lime-100 border border-lime-300 flex items-center justify-center text-lime-800 shrink-0">
-              <Camera className="w-6 h-6" />
+      <div className="bg-white rounded-2xl p-3.5 sm:p-5 border border-lime-200 shadow-sm">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-lime-100 border border-lime-300 flex items-center justify-center text-lime-800 shrink-0">
+              <Camera className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <div>
-              <h2 className="text-base sm:text-lg font-black text-slate-800">Before-Meal Capture (Served)</h2>
-              <p className="text-xs text-slate-500 font-medium">Step 2 of 8 · Baseline Serving Computer Vision Analysis</p>
+            <div className="min-w-0 flex-1">
+              <h2 className="text-sm sm:text-lg font-black text-slate-800 truncate">Before-Meal Capture (Served)</h2>
+              <p className="text-[11px] sm:text-xs text-slate-500 font-medium truncate">Step 2 of 8 · Served Baseline Analysis</p>
             </div>
           </div>
           <button
             onClick={handleSimulateRescan}
             disabled={isScanning}
-            className="flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-xl border border-lime-300 bg-lime-50 text-lime-800 hover:bg-lime-100 transition shadow-2xs"
+            className="flex items-center gap-1.5 text-xs font-bold px-2.5 sm:px-3 py-1.5 rounded-xl border border-lime-300 bg-lime-50 text-lime-800 hover:bg-lime-100 transition shadow-2xs shrink-0"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${isScanning ? 'animate-spin text-lime-600' : ''}`} />
-            <span>{isScanning ? 'Scanning...' : 'Re-Scan Plate'}</span>
+            <span>{isScanning ? 'Scanning...' : 'Re-Scan'}</span>
           </button>
         </div>
       </div>
 
-      {/* Responsive 2-Column Grid on Desktop */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-start">
+      {/* Responsive 2-Column Grid on Desktop (lg+) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
         {/* Left Column (7 cols): Simulated Plate Visualizer */}
-        <div className="md:col-span-7 space-y-2">
+        <div className="lg:col-span-7 space-y-2">
           <div className="flex items-center justify-between px-1">
             <span className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-lime-600" />
@@ -65,7 +65,7 @@ export const Step2BeforeMeal: React.FC<Step2BeforeMealProps> = ({
         </div>
 
         {/* Right Column (5 cols): Detected Food Inventory Breakdown */}
-        <div className="md:col-span-5 bg-white rounded-2xl p-4 sm:p-5 border border-lime-200 shadow-sm space-y-3">
+        <div className="lg:col-span-5 bg-white rounded-2xl p-4 sm:p-5 border border-lime-200 shadow-sm space-y-3">
           <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-800">
             <Layers className="w-4 h-4 text-lime-600" />
             <span>AI Multi-Label Segmentation</span>

@@ -25,22 +25,22 @@ export const Step3AfterMealMath: React.FC<Step3AfterMealMathProps> = ({
   return (
     <div className="space-y-4 animate-in fade-in duration-300">
       {/* Title Header Card */}
-      <div className="bg-white rounded-2xl p-4 sm:p-5 border border-lime-200 shadow-sm">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-lime-100 border border-lime-300 flex items-center justify-center text-lime-800 shrink-0">
-              <Calculator className="w-6 h-6" />
+      <div className="bg-white rounded-2xl p-3.5 sm:p-5 border border-lime-200 shadow-sm">
+        <div className="flex items-center justify-between gap-2 flex-wrap sm:flex-nowrap">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-lime-100 border border-lime-300 flex items-center justify-center text-lime-800 shrink-0">
+              <Calculator className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <div>
-              <h2 className="text-base sm:text-lg font-black text-slate-800">After-Meal Capture & Math</h2>
-              <p className="text-xs text-slate-500 font-medium">Step 3 of 8 · Differential Intake Engine</p>
+            <div className="min-w-0 flex-1">
+              <h2 className="text-sm sm:text-lg font-black text-slate-800 truncate">After-Meal Capture & Math</h2>
+              <p className="text-[11px] sm:text-xs text-slate-500 font-medium truncate">Step 3 of 8 · Differential Intake Engine</p>
             </div>
           </div>
           {/* View Toggle */}
-          <div className="inline-flex rounded-xl bg-slate-100 p-1 text-xs font-bold shadow-2xs">
+          <div className="inline-flex rounded-xl bg-slate-100 p-1 text-[11px] sm:text-xs font-bold shadow-2xs shrink-0">
             <button
               onClick={() => setActiveView('after')}
-              className={`px-3 py-1.5 rounded-lg transition ${
+              className={`px-2.5 sm:px-3 py-1.5 rounded-lg transition ${
                 activeView === 'after'
                   ? 'bg-white text-slate-900 shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
@@ -50,7 +50,7 @@ export const Step3AfterMealMath: React.FC<Step3AfterMealMathProps> = ({
             </button>
             <button
               onClick={() => setActiveView('before')}
-              className={`px-3 py-1.5 rounded-lg transition ${
+              className={`px-2.5 sm:px-3 py-1.5 rounded-lg transition ${
                 activeView === 'before'
                   ? 'bg-white text-slate-900 shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
@@ -62,10 +62,10 @@ export const Step3AfterMealMath: React.FC<Step3AfterMealMathProps> = ({
         </div>
       </div>
 
-      {/* Responsive 2-Column Grid on Desktop */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-start">
+      {/* Responsive 2-Column Grid on Desktop (lg+) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
         {/* Left Column (7 cols): Visual Leftover Plate */}
-        <div className="md:col-span-7 space-y-2">
+        <div className="lg:col-span-7 space-y-2">
           <div className="flex items-center justify-between px-1">
             <span className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-lime-600" />
@@ -85,7 +85,7 @@ export const Step3AfterMealMath: React.FC<Step3AfterMealMathProps> = ({
         </div>
 
         {/* Right Column (5 cols): Automated Calculation Box */}
-        <div className="md:col-span-5 bg-gradient-to-br from-lime-50/70 to-white rounded-2xl p-4 sm:p-5 border-2 border-lime-400 shadow-md space-y-3.5">
+        <div className="lg:col-span-5 bg-gradient-to-br from-lime-50/70 to-white rounded-2xl p-4 sm:p-5 border-2 border-lime-400 shadow-md space-y-3.5">
           <div className="flex items-center justify-between">
             <span className="text-xs font-black uppercase tracking-wider text-lime-950 flex items-center gap-1.5">
               <Scale className="w-4 h-4 text-lime-700" />
