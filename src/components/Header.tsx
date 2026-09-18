@@ -7,8 +7,7 @@ import {
   RotateCcw,
   Smartphone,
   Server,
-  Maximize2,
-  Minimize2,
+  Monitor,
   CheckCircle,
 } from 'lucide-react';
 import { usePWAInstall } from '../hooks/usePWAInstall';
@@ -39,47 +38,45 @@ export const Header: React.FC<HeaderProps> = ({
   const [showIOSModal, setShowIOSModal] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-lime-200/80 px-3 sm:px-4 pt-[max(0.65rem,env(safe-area-inset-top))] pb-2.5 transition-all">
-      <div className="flex items-center justify-between gap-1.5">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-lime-200/80 px-3 sm:px-6 pt-[max(0.65rem,env(safe-area-inset-top))] pb-2.5 transition-all shadow-xs">
+      <div className="w-full max-w-6xl mx-auto flex items-center justify-between gap-2">
         {/* Brand */}
-        <div className="flex items-center gap-2 shrink-0">
-          <div className="w-8 h-8 rounded-xl bg-lime-500 flex items-center justify-center text-white shadow-sm ring-2 ring-lime-200 shrink-0">
-            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+        <div className="flex items-center gap-2.5 shrink-0">
+          <div className="w-9 h-9 rounded-xl bg-lime-500 flex items-center justify-center text-white shadow-sm ring-2 ring-lime-200 shrink-0">
+            <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/>
             </svg>
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-slate-900 text-sm tracking-tight">AuraFix</span>
-              <span className="text-[9px] font-bold uppercase px-1.5 py-0.2 rounded-full bg-lime-100 text-lime-800 border border-lime-300">
+              <span className="font-black text-slate-900 text-base tracking-tight">AuraFix</span>
+              <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-lime-100 text-lime-800 border border-lime-300">
                 PWA
               </span>
             </div>
-            <p className="text-[10px] text-slate-500 font-medium hidden min-[360px]:block">Consumption-Aware AI</p>
+            <p className="text-[11px] text-slate-500 font-medium hidden min-[400px]:block">Consumption-Aware AI Tracking</p>
           </div>
         </div>
 
         {/* Action Controls */}
-        <div className="flex items-center gap-1 sm:gap-1.5">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           {/* REST API Status Indicator */}
           <span
             title={apiStatus.message}
-            className={`hidden min-[480px]:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold border ${
+            className={`hidden min-[540px]:inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold border ${
               apiStatus.isLive
                 ? 'bg-lime-50 text-lime-800 border-lime-300'
                 : 'bg-slate-50 text-slate-600 border-slate-200'
             }`}
           >
-            <Server className="w-2.5 h-2.5 text-lime-600" />
-            <span className="truncate max-w-[80px] sm:max-w-none">
-              {apiStatus.isLive ? 'REST API Live' : 'Offline Cache'}
-            </span>
+            <Server className="w-3 h-3 text-lime-600" />
+            <span>{apiStatus.isLive ? 'Vercel REST API' : 'Offline Cache'}</span>
           </span>
 
           {/* Online/Offline Status Indicator */}
           <span
             title={isOnline ? 'Online & Service Worker active' : 'Offline mode — Cached assets loaded'}
-            className={`inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] font-medium border ${
+            className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold border ${
               isOnline
                 ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
                 : 'bg-amber-50 text-amber-700 border-amber-200'
@@ -88,32 +85,33 @@ export const Header: React.FC<HeaderProps> = ({
             {isOnline ? (
               <>
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <Wifi className="w-2.5 h-2.5" />
+                <Wifi className="w-3 h-3" />
+                <span className="hidden sm:inline">Online</span>
               </>
             ) : (
               <>
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                <WifiOff className="w-2.5 h-2.5" />
-                <span className="hidden min-[380px]:inline">Offline</span>
+                <WifiOff className="w-3 h-3" />
+                <span>Offline</span>
               </>
             )}
           </span>
 
-          {/* Desktop/Tablet Responsive View Toggle */}
+          {/* Desktop View Mode Toggle (Available on md+ screens) */}
           <button
             onClick={onToggleViewMode}
-            className="hidden md:inline-flex items-center gap-1 text-xs px-2 py-1 rounded-lg border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition"
-            title={viewMode === 'mobile' ? 'Switch to Expanded Desktop Layout' : 'Switch to Mobile PWA Device View'}
+            className="hidden md:inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1.5 rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 shadow-2xs transition active:scale-95"
+            title={viewMode === 'expanded' ? 'Preview inside a mobile phone frame (390px)' : 'Switch to full desktop expanded layout'}
           >
-            {viewMode === 'mobile' ? (
+            {viewMode === 'expanded' ? (
               <>
-                <Maximize2 className="w-3 h-3 text-lime-600" />
-                <span className="text-[11px]">Expanded</span>
+                <Smartphone className="w-3.5 h-3.5 text-slate-600" />
+                <span>Phone View</span>
               </>
             ) : (
               <>
-                <Minimize2 className="w-3 h-3 text-lime-600" />
-                <span className="text-[11px]">Phone View</span>
+                <Monitor className="w-3.5 h-3.5 text-lime-600" />
+                <span>Desktop View</span>
               </>
             )}
           </button>
@@ -122,18 +120,18 @@ export const Header: React.FC<HeaderProps> = ({
           {isInstallable && (
             <button
               onClick={install}
-              className="flex items-center gap-1 bg-lime-500 hover:bg-lime-600 active:scale-95 text-slate-900 font-semibold text-xs px-2 sm:px-2.5 py-1.5 rounded-lg shadow-sm transition"
+              className="flex items-center gap-1.5 bg-lime-500 hover:bg-lime-600 active:scale-95 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-xl shadow-xs transition"
               title="Install AuraFix as standalone mobile app"
             >
               <Download className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Install</span>
+              <span>Install</span>
             </button>
           )}
 
           {isIOS && !isInstalled && (
             <button
               onClick={() => setShowIOSModal(true)}
-              className="flex items-center gap-1 border border-lime-300 bg-lime-50 hover:bg-lime-100 text-lime-800 text-xs px-2 py-1 rounded-lg transition font-medium"
+              className="flex items-center gap-1 border border-lime-300 bg-lime-50 hover:bg-lime-100 text-lime-800 text-xs px-2.5 py-1 rounded-xl transition font-medium"
               title="Install on iOS Safari"
             >
               <Smartphone className="w-3 h-3" />
@@ -144,24 +142,24 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Reset Demo */}
           <button
             onClick={onResetDemo}
-            className="p-1.5 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition"
+            className="p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-xl transition"
             title="Reset Demo to Step 1"
             aria-label="Reset Demo"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
+            <RotateCcw className="w-4 h-4" />
           </button>
 
           {/* Tour Mode Toggle */}
           <button
             onClick={onToggleTourMode}
-            className={`flex items-center gap-1 text-xs px-2 sm:px-2.5 py-1 rounded-lg border font-medium transition ${
+            className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-xl border font-bold transition ${
               isTourMode
-                ? 'bg-lime-50 border-lime-300 text-lime-800'
-                : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                ? 'bg-lime-500 text-slate-950 border-lime-600 shadow-xs'
+                : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
             }`}
           >
-            <Sparkles className="w-3 h-3 text-lime-600" />
-            <span className="text-[11px]">{isTourMode ? `Step ${currentStep}/8` : 'Tour'}</span>
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>{isTourMode ? `Step ${currentStep}/8` : 'Tour'}</span>
           </button>
         </div>
       </div>

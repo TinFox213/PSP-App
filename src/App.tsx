@@ -1,5 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Header } from './components/Header';
+import { StepNavigationBar } from './components/StepNavigationBar';
+import { TourCalloutHero } from './components/TourCalloutHero';
 import { WalkthroughController } from './components/WalkthroughController';
 import { OfflineIndicator } from './components/OfflineIndicator';
 import { Step1Profile } from './components/steps/Step1Profile';
@@ -31,7 +33,15 @@ export default function App() {
   // Current Walkthrough Step (1 to 8)
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [isTourMode, setIsTourMode] = useState<boolean>(true);
-  const [viewMode, setViewMode] = useState<'mobile' | 'expanded'>('mobile');
+
+  // Auto-detect responsive mode: default to 'expanded' on desktop/tablet, 'mobile' on narrow screens
+  const [viewMode, setViewMode] = useState<'mobile' | 'expanded'>(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth >= 768 ? 'expanded' : 'mobile';
+    }
+    return 'expanded';
+  });
+
   const [apiStatus, setApiStatus] = useState<ApiStatus>({
     isLive: false,
     message: 'Checking Vercel API status...',
@@ -212,55 +222,50 @@ export default function App() {
     }
   };
 
-  const containerMaxWidthClass = viewMode === 'expanded' ? 'max-w-4xl' : 'max-w-md';
+  const currentStepInfo = WALKTHROUGH_STEPS.find((s) => s.stepNumber === currentStep) || WALKTHROUGH_STEPS[0];
+  const containerMaxWidthClass = viewMode === 'expanded' ? 'max-w-6xl' : 'max-w-md';
 
   return (
     <div className="min-h-screen bg-slate-100 flex flex-col items-center selection:bg-lime-200 selection:text-lime-900 font-sans transition-colors duration-300">
       {/* Offline Status Badge */}
       <OfflineIndicator />
 
-      {/* Responsive App Frame */}
+      {/* Top Header Navigation (Spans full-width with max-w-6xl inner container) */}
+      <Header
+        currentStep={currentStep}
+        isTourMode={isTourMode}
+        onToggleTourMode={() => setIsTourMode((prev) => !prev)}
+        onResetDemo={handleResetDemo}
+        apiStatus={apiStatus}
+        viewMode={viewMode}
+        onToggleViewMode={() =>
+          setViewMode((prev) => (prev === 'mobile' ? 'expanded' : 'mobile'))
+        }
+      />
+
+      {/* Step Navigation Bar (Desktop Stepper / Mobile Auto-scrolling Tabs) */}
+      <StepNavigationBar
+        currentStep={currentStep}
+        onSelectStep={handleSelectStep}
+      />
+
+      {/* Main Container */}
       <div
-        className={`w-full ${containerMaxWidthClass} min-h-screen bg-lime-50/40 border-x border-lime-200/80 shadow-2xl flex flex-col relative transition-all duration-300 ${
-          isTourMode ? 'pb-60 sm:pb-56' : 'pb-36 sm:pb-32'
+        className={`w-full ${containerMaxWidthClass} flex-1 flex flex-col relative px-3 sm:px-6 py-4 space-y-4 pb-28 transition-all duration-300 ${
+          viewMode === 'mobile'
+            ? 'bg-lime-50/40 border-x border-lime-200/80 shadow-2xl min-h-screen my-3 rounded-3xl'
+            : ''
         }`}
       >
-        {/* Top Header Navigation */}
-        <Header
-          currentStep={currentStep}
+        {/* In-Flow AI Tour Explanatory Callout Banner */}
+        <TourCalloutHero
+          step={currentStepInfo}
           isTourMode={isTourMode}
-          onToggleTourMode={() => setIsTourMode((prev) => !prev)}
-          onResetDemo={handleResetDemo}
-          apiStatus={apiStatus}
-          viewMode={viewMode}
-          onToggleViewMode={() =>
-            setViewMode((prev) => (prev === 'mobile' ? 'expanded' : 'mobile'))
-          }
+          onDismiss={() => setIsTourMode(false)}
         />
 
-        {/* Step Navigation Tabs with smooth horizontal scrolling */}
-        <div className="bg-white/90 border-b border-lime-200/80 px-2.5 sm:px-3 py-2 flex items-center gap-1.5 overflow-x-auto scrollbar-none">
-          {WALKTHROUGH_STEPS.map((s) => {
-            const isActive = s.stepNumber === currentStep;
-            return (
-              <button
-                key={s.stepNumber}
-                onClick={() => handleSelectStep(s.stepNumber)}
-                className={`flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-full whitespace-nowrap font-medium transition shrink-0 ${
-                  isActive
-                    ? 'bg-lime-500 text-slate-950 font-bold shadow-xs'
-                    : 'bg-slate-50 text-slate-600 hover:bg-lime-100/60 border border-slate-200'
-                }`}
-              >
-                <span>{s.stepNumber}.</span>
-                <span>{s.shortTitle}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Main Content View Container */}
-        <main className="flex-1 p-3 sm:p-4 space-y-4">
+        {/* Step Views */}
+        <main className="flex-1 space-y-4">
           {currentStep === 1 && (
             <Step1Profile
               profile={profile}
@@ -330,19 +335,19 @@ export default function App() {
             />
           )}
         </main>
-
-        {/* Floating Walkthrough Controller Fixed at Bottom */}
-        <WalkthroughController
-          currentStep={currentStep}
-          totalSteps={WALKTHROUGH_STEPS.length}
-          onPrev={handlePrev}
-          onNext={handleNext}
-          onSelectStep={handleSelectStep}
-          isTourMode={isTourMode}
-          onToggleTourMode={() => setIsTourMode((prev) => !prev)}
-          containerMaxWidthClass={containerMaxWidthClass}
-        />
       </div>
+
+      {/* Floating Walkthrough Controller Fixed at Bottom (Non-blocking, glassmorphic) */}
+      <WalkthroughController
+        currentStep={currentStep}
+        totalSteps={WALKTHROUGH_STEPS.length}
+        onPrev={handlePrev}
+        onNext={handleNext}
+        onSelectStep={handleSelectStep}
+        isTourMode={isTourMode}
+        onToggleTourMode={() => setIsTourMode((prev) => !prev)}
+        containerMaxWidthClass={containerMaxWidthClass}
+      />
     </div>
   );
 }
