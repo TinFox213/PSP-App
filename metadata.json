@@ -1,0 +1,6 @@
+{
+  "name": "AuraFix Nutrition PWA",
+  "description": "AI-Based Consumption-Aware Food Nutrition Tracking System with before/after meal intake math, Tamil Nadu regional dietary recommendations, and voice logging.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

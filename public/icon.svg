@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="limeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#bef264"/>
+      <stop offset="100%" stop-color="#65a30d"/>
+    </linearGradient>
+    <filter id="drop" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#1e293b" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="#14532d"/>
+  <rect x="24" y="24" width="464" height="464" rx="112" fill="url(#limeGrad)"/>
+  <!-- Plate / Bowl Ring -->
+  <circle cx="256" cy="256" r="160" fill="#ffffff" filter="url(#drop)"/>
+  <circle cx="256" cy="256" r="140" fill="#f7fee7" stroke="#84cc16" stroke-width="8"/>
+  <!-- Nutrition Leaf & Fork / Core Innovation Symbol -->
+  <path d="M256 160 C210 160 180 200 180 256 C180 300 220 330 256 340 C292 330 332 300 332 256 C332 200 302 160 256 160 Z" fill="#4d7c0f"/>
+  <path d="M256 160 L256 340" stroke="#bef264" stroke-width="8" stroke-linecap="round"/>
+  <path d="M256 220 C235 210 215 225 215 225" stroke="#bef264" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <path d="M256 260 C277 250 297 265 297 265" stroke="#bef264" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <!-- AI Pulse Nodes -->
+  <circle cx="160" cy="180" r="14" fill="#65a30d"/>
+  <circle cx="352" cy="180" r="14" fill="#65a30d"/>
+  <circle cx="256" cy="380" r="16" fill="#15803d"/>
+</svg>
