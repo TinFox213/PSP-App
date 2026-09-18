@@ -252,40 +252,47 @@ export const PlateVisualizer: React.FC<PlateVisualizerProps> = ({
                       fill="none"
                     />
 
-                    {/* Tag Badge */}
-                    <g transform={`translate(${x}, ${Math.max(y - 26, 8)})`}>
-                      <rect
-                        width={Math.max(w * 0.9, 140)}
-                        height="24"
-                        rx="6"
-                        fill="#0f172a"
-                        stroke={det.color}
-                        strokeWidth="1.5"
-                        opacity="0.95"
-                      />
-                      <circle cx="10" cy="12" r="3.5" fill={det.color} />
-                      <text
-                        x="20"
-                        y="15"
-                        fill="#ffffff"
-                        fontSize="11"
-                        fontWeight="bold"
-                        fontFamily="system-ui"
-                      >
-                        {det.name.split(' ')[0]} · {det.quantity}
-                      </text>
-                      <text
-                        x={Math.max(w * 0.9, 140) - 6}
-                        y="15"
-                        fill={det.color}
-                        fontSize="10"
-                        fontWeight="bold"
-                        textAnchor="end"
-                        fontFamily="system-ui"
-                      >
-                        {Math.round(det.confidence * 100)}%
-                      </text>
-                    </g>
+                    {/* Tag Badge Clamped to SVG canvas */}
+                    {(() => {
+                      const badgeW = Math.min(Math.max(w * 0.9, 130), 160);
+                      const badgeX = Math.min(Math.max(x, 8), 500 - badgeW - 8);
+                      const badgeY = Math.max(y - 28, 10);
+                      return (
+                        <g transform={`translate(${badgeX}, ${badgeY})`}>
+                          <rect
+                            width={badgeW}
+                            height="24"
+                            rx="6"
+                            fill="#0f172a"
+                            stroke={det.color}
+                            strokeWidth="1.5"
+                            opacity="0.95"
+                          />
+                          <circle cx="10" cy="12" r="3.5" fill={det.color} />
+                          <text
+                            x="20"
+                            y="15"
+                            fill="#ffffff"
+                            fontSize="11"
+                            fontWeight="bold"
+                            fontFamily="system-ui"
+                          >
+                            {det.name.split(' ')[0]} · {det.quantity}
+                          </text>
+                          <text
+                            x={badgeW - 6}
+                            y="15"
+                            fill={det.color}
+                            fontSize="10"
+                            fontWeight="bold"
+                            textAnchor="end"
+                            fontFamily="system-ui"
+                          >
+                            {Math.round(det.confidence * 100)}%
+                          </text>
+                        </g>
+                      );
+                    })()}
                   </g>
                 );
               })}

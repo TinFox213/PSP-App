@@ -166,7 +166,7 @@ export const Step4PortionAdjust: React.FC<Step4PortionAdjustProps> = ({
             <span className="text-slate-700 font-mono text-[11px]">Scaled ×{scale.toFixed(2)}</span>
           </div>
 
-          <div className="grid grid-cols-4 gap-2 text-center">
+          <div className="grid grid-cols-2 min-[420px]:grid-cols-4 gap-2 text-center">
             <div className="bg-white p-2 rounded-lg border border-slate-200">
               <span className="text-[10px] text-slate-600 block">Calories</span>
               <span className="text-xs font-bold text-slate-800">{scaledCalories}</span>

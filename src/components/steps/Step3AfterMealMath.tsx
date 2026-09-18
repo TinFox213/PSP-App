@@ -100,33 +100,31 @@ export const Step3AfterMealMath: React.FC<Step3AfterMealMathProps> = ({
           </span>
         </div>
 
-        {/* 3 Step Formula Line */}
-        <div className="grid grid-cols-3 gap-2 text-center py-2">
+        {/* 3 Step Formula Line (Responsive Flex) */}
+        <div className="flex items-center justify-between gap-1 sm:gap-2 text-center py-2">
           {/* Served */}
-          <div className="bg-white p-2.5 rounded-xl border border-slate-200 shadow-xs">
-            <span className="text-[10px] font-bold uppercase text-slate-500 block">Served</span>
-            <span className="text-sm font-extrabold text-slate-800 block">300g</span>
-            <span className="text-[10px] text-slate-600 font-medium">(3 dosas)</span>
+          <div className="flex-1 min-w-0 bg-white p-2 sm:p-2.5 rounded-xl border border-slate-200 shadow-xs">
+            <span className="text-[9px] sm:text-[10px] font-bold uppercase text-slate-500 block truncate">Served</span>
+            <span className="text-xs sm:text-sm font-extrabold text-slate-800 block">{mealMath.servedWeightG}g</span>
+            <span className="text-[9px] sm:text-[10px] text-slate-600 font-medium truncate block">{mealMath.servedUnits}</span>
           </div>
+
+          <span className="text-slate-400 font-bold text-sm sm:text-base shrink-0 px-0.5">−</span>
 
           {/* Minus Leftover */}
-          <div className="bg-rose-50 p-2.5 rounded-xl border border-rose-200 shadow-xs relative">
-            <span className="absolute -left-2 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-sm">
-              −
-            </span>
-            <span className="text-[10px] font-bold uppercase text-rose-700 block">Leftover</span>
-            <span className="text-sm font-extrabold text-rose-800 block">50g</span>
-            <span className="text-[10px] text-rose-600 font-medium">(0.5 dosa)</span>
+          <div className="flex-1 min-w-0 bg-rose-50 p-2 sm:p-2.5 rounded-xl border border-rose-200 shadow-xs">
+            <span className="text-[9px] sm:text-[10px] font-bold uppercase text-rose-700 block truncate">Leftover</span>
+            <span className="text-xs sm:text-sm font-extrabold text-rose-800 block">{mealMath.leftoverWeightG}g</span>
+            <span className="text-[9px] sm:text-[10px] text-rose-600 font-medium truncate block">{mealMath.leftoverUnits}</span>
           </div>
 
+          <span className="text-slate-900 font-bold text-sm sm:text-base shrink-0 px-0.5">=</span>
+
           {/* Equals Actual Intake */}
-          <div className="bg-lime-500 p-2.5 rounded-xl shadow-xs text-slate-950 relative">
-            <span className="absolute -left-2 top-1/2 -translate-y-1/2 text-slate-900 font-bold text-sm">
-              =
-            </span>
-            <span className="text-[10px] font-extrabold uppercase text-slate-950 block">Actual Intake</span>
-            <span className="text-sm font-black text-slate-950 block">250g</span>
-            <span className="text-[10px] font-bold text-slate-900">(2.5 dosas)</span>
+          <div className="flex-1 min-w-0 bg-lime-500 p-2 sm:p-2.5 rounded-xl shadow-xs text-slate-950">
+            <span className="text-[9px] sm:text-[10px] font-extrabold uppercase text-slate-950 block truncate">Actual Intake</span>
+            <span className="text-xs sm:text-sm font-black text-slate-950 block">{mealMath.consumedWeightG}g</span>
+            <span className="text-[9px] sm:text-[10px] font-bold text-slate-900 truncate block">{mealMath.consumedUnits}</span>
           </div>
         </div>
 

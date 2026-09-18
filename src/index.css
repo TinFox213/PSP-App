@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+@layer utilities {
+  /* Safe area utility classes for iOS dynamic island, notches, and home indicator bar */
+  .pt-safe {
+    padding-top: max(0.5rem, env(safe-area-inset-top));
+  }
+  .pb-safe {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+  .pl-safe {
+    padding-left: max(0.5rem, env(safe-area-inset-left));
+  }
+  .pr-safe {
+    padding-right: max(0.5rem, env(safe-area-inset-right));
+  }
+  
+  /* Scrollbar hiding utilities */
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Base resets for fluid PWA scaling */
+html, body {
+  overflow-x: hidden;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}

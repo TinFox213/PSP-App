@@ -139,7 +139,7 @@ export const Step1Profile: React.FC<Step1ProfileProps> = ({
         {/* Daily Nutrition Baselines */}
         <div className="pt-2 border-t border-slate-100">
           <p className="text-xs font-semibold text-slate-700 mb-2">Automated Macro Targets:</p>
-          <div className="grid grid-cols-4 gap-2 text-center">
+          <div className="grid grid-cols-2 min-[420px]:grid-cols-4 gap-2 text-center">
             <div className="bg-lime-50/70 p-2 rounded-xl border border-lime-100">
               <span className="block text-[10px] text-slate-500 font-medium">Protein</span>
               <span className="text-sm font-extrabold text-lime-900">{profile.targetProteinG}g</span>

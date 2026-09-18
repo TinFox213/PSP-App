@@ -85,7 +85,7 @@ export const Step8Dashboard: React.FC<Step8DashboardProps> = ({
           <span className="text-[11px] font-semibold text-lime-700">Live Intake</span>
         </div>
 
-        <div className="grid grid-cols-4 gap-2 pt-1">
+        <div className="grid grid-cols-2 min-[420px]:grid-cols-4 gap-2.5 pt-1">
           {/* Calories */}
           <RadialProgress
             value={totalCalories}
